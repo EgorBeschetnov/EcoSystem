@@ -5,9 +5,9 @@
 using namespace std;
 
 #ifdef _UNICODE
-typedef wchar_t TCHAR;
+typedef wchar_t _TCHAR;
 #else
-typedef char TCHAR;
+typedef char _TCHAR;
 #endif
 
 const int SZ=10; // SZ*2 - кол-во объектов в экосистеме == кол-во ячеек в матрице
@@ -15,7 +15,7 @@ const int SZ=10; // SZ*2 - кол-во объектов в экосистеме 
 const int _pl=7; 
 const int _he=4;
 const int _pr=3;
-const long N=10; //кол-во итераций
+const long N=9; //кол-во итераций
 int Time; //кол-во итераций на данный момент
  
  
@@ -61,7 +61,7 @@ public:
 };
  
 void Step(int s, int i, int j){
-    cout << "step ";
+    //cout << "step ";
     switch (s)
     {
     case 1:
@@ -93,7 +93,7 @@ void Step(int s, int i, int j){
 }
  
 void Random(int m, int n){
-    cout << "Random ";
+    //cout << "Random ";
     int side;
     bool k = 0;
     do {
@@ -136,7 +136,7 @@ void clear(int i, int j){
 }
  
 void LivePl(int m, int n){ //функция жизненного цикла растения 
-    cout << "Plant ";
+    //cout << "Plant ";
     int DiplTime = 3; //промежуток времени через который происходит размножение в экосистеме.
     MAP[m][n].Energy = MAP[m][n].Energy - 1; //отнимает 1 энергию, 
     if (MAP[m][n].Energy == 0){ //если энергии не осталось, убирает растение с поля
@@ -155,7 +155,7 @@ void LivePl(int m, int n){ //функция жизненного цикла ра
 }
  
 void LiveHe(int m, int n){ //функция жизненного цикла травоядного
-    cout << "Herbivore ";
+    //cout << "Herbivore ";
     int DiplTime = 5; //промежуток времени через который происходит размножение в экосистеме.
     MAP[m][n].Energy = MAP[m][n].Energy - 1; //отнимает 1 энергию, 
     if (MAP[m][n].Energy == 0){ //если энергии не осталось, убирает животное с поля
@@ -204,9 +204,9 @@ void LiveHe(int m, int n){ //функция жизненного цикла тр
         }
  
         Herbivore Simple; //опытный образец травоядного для сравнения 
-        cout << Simple.DiplEnergy << endl;
-        cout << MAP[m][n].Energy << endl;
-        cout << DiplTime << endl;
+        //cout << Simple.DiplEnergy << endl;
+        //cout << MAP[m][n].Energy << endl;
+        //cout << DiplTime << endl;
         if ((MAP[m][n].Energy >= Simple.DiplEnergy) && (Time >= DiplTime)){ //условие размножения
             Random(m, n);
             MAP[m][n].Energy = 20;
@@ -217,7 +217,7 @@ void LiveHe(int m, int n){ //функция жизненного цикла тр
 }
  
 void LivePr(int m, int n){ //функция жизненного цикла хищника
-    cout << "Predator ";
+    //cout << "Predator ";
     int DiplTime = 7; //промежуток времени через который происходит размножение в экосистеме.
     MAP[m][n].Energy = MAP[m][n].Energy - 1; //отнимает 1 энергию, 
     if (MAP[m][n].Energy == 0){ //если энергии не осталось, убирает животное с поля
@@ -266,9 +266,9 @@ void LivePr(int m, int n){ //функция жизненного цикла хи
         }
  
         Predator Simple; //опытный образец хищника для сравнения 
-        cout << Simple.DiplEnergy << endl;
-        cout << MAP[m][n].Energy << endl;
-        cout << DiplTime << endl;
+        //cout << Simple.DiplEnergy << endl;
+        //cout << MAP[m][n].Energy << endl;
+        //cout << DiplTime << endl;
         if ((MAP[m][n].Energy >= Simple.DiplEnergy) && (Time >= DiplTime)){ //условие размножения
             Random(m, n);
             MAP[m][n].Energy = 25;
@@ -279,9 +279,9 @@ void LivePr(int m, int n){ //функция жизненного цикла хи
 }
  
 void show(){
-    cout << "show";
+    //cout << "show";
     int c;
-    cout << "FOREST" << endl; //рисуем таблицу и выводим данные
+    //cout << "FOREST" << endl; //рисуем таблицу и выводим данные
     cout << char(201);
     for (int i = 0; i < SZ * 2 + 1; i++){
         cout << char(205);
@@ -321,8 +321,8 @@ void show(){
     cout << char(188) << endl;
 }
  
-void NachUsl(){ //функция задающая начальные условия экосистеме, помещает объекты на поле
-    cout << "Start";
+void Start(){ //функция задающая начальные условия экосистеме, помещает объекты на поле
+    cout << "Start" << endl;
     for (int i = 0; i < SZ; i++){
         for (int j = 0; j < SZ; j++){
             clear(i, j);
@@ -390,7 +390,7 @@ void NachUsl(){ //функция задающая начальные услов�
     }
  
 void Life(){ // Функция прохождения 1 жизненного цикла для карты
-    cout << "life" << endl;
+    //cout << "life" << endl;
     Time = Time + 1;
  
     for (int i = 0; i < SZ; i++){  //рассматриваем все ячейки, ищем заполненные
@@ -410,7 +410,7 @@ void Life(){ // Функция прохождения 1 жизненного ц�
                     LivePr(i,j);
                     break;
                 default: //индефикатор не опознан - ошибка
-                    cout << "EROR";
+                    cout << "ERROR";
                     break;
                 }
             }
@@ -420,12 +420,17 @@ void Life(){ // Функция прохождения 1 жизненного ц�
     
 }
  
-int main(int argc, TCHAR* argv[])
+int main(int argc, _TCHAR* argv[])
 {   
     srand((time(NULL)));
-    NachUsl();
+    Start();
     show();
-    Life();
-    show();
+    cout << ' ' << endl;
+
+    for(int i = 0; i < N; i++){
+        Life();
+        show();
+        cout << ' ' << endl;
+    }
     return 0;
 }
