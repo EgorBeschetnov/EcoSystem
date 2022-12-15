@@ -427,7 +427,7 @@ int main(int argc, _TCHAR* argv[])
     show();
     cout << ' ' << endl;
 
-    for(int i = 0; i < N; i++){
+    for(int i = 0; i < N - 1; i++){
         Life();
         show();
         cout << ' ' << endl;
